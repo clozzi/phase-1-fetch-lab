@@ -13,6 +13,19 @@ function renderBooks(books) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  fetchBooks();
-});
+document.addEventListener('DOMContentLoaded', fetchBooks, fetchDogs);
+
+function fetchDogs() {
+  fetch("https://dog.ceo/api/breeds/image/random")
+  .then((resp) => resp.json())
+  .then((image) => renderBooks(image));  
+}
+
+function renderImages(images) {
+  const main = document.querySelector('main');
+  images.forEach(pic => {
+    const img = document.createElement('img');
+    img.innerHTML = pic.random;
+    main.appendChild(img);
+  })
+}
